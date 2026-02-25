@@ -6,6 +6,7 @@ function DurationExercise({ exercise }) {
   const [running, setRunning] = useState(false);
 
 
+
   useEffect(() => {
     let interval = null;
 
@@ -20,9 +21,14 @@ function DurationExercise({ exercise }) {
   }, [running]);
 
   const formatTime = (totalSeconds) => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const mins = Math.floor((totalSeconds % 3600) / 60); 
-    const secs = totalSeconds % 60;
+    let hours = Math.floor(totalSeconds / 3600);
+    let mins = Math.floor((totalSeconds % 3600) / 60); 
+    let secs = totalSeconds % 60;
+
+    hours = String(hours).padStart(1, "0");
+    mins = String(mins).padStart(1, "0");
+    secs = String(secs).padStart(1, "0");
+
     return `${hours < 10 ? `0${hours}` : hours}: ${mins < 10 ? `0${mins}` : mins}: ${secs < 10 ? `0${secs}` : secs}`;
   };
 
