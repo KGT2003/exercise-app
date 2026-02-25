@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback,  } from "react";
 
 function DurationExercise({ exercise }) {
   const [timer, setTimer] = useState(null);
   const [curTime, setCurTime] = useState(0);
   const [running, setRunning] = useState(false);
+
 
   useEffect(() => {
     let interval = null;
@@ -18,6 +19,15 @@ function DurationExercise({ exercise }) {
     return () => clearInterval(interval);
   }, [running]);
 
+  const formatTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60); 
+    const secs = totalSeconds % 60;
+    return `${hours < 10 ? `0${hours}` : hours}: ${mins < 10 ? `0${mins}` : mins}: ${secs < 10 ? `0${secs}` : secs}`;
+  };
+
+
+
   const click = useCallback(() => {
     if (running) {
       clearInterval(timer);
@@ -30,7 +40,7 @@ function DurationExercise({ exercise }) {
   return (
     <div>
       <h2>{exercise.name}</h2>
-      <p>Time: {curTime} seconds</p>
+      <p>{formatTime(curTime)}</p>
       <button onClick={click}>
         {running ? "Stop" : "Start"}
       </button>
@@ -45,6 +55,8 @@ function DurationExercise({ exercise }) {
       </button>
     </div>
   );
-}
 
+
+  }
+ 
 export default DurationExercise;
