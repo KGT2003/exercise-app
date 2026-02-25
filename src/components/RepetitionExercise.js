@@ -10,6 +10,9 @@ function RepetitionExercise({exercise}) {
             <button onClick = {() => setCount(count + 1)}>
                 Add Rep
             </button>
+            <button onClick = {() => setCount(0)}>
+                Reset
+            </button>
         </div>
 
     );
